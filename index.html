@@ -40,3 +40,18 @@
 
     function draw()					//This is the header for the function that will actually display the characters on the screen.  It takes no parameters.
         {
+
+    ctx.fillStyle = "rgba(0, 0, 0, 0.04)";  //Sets the color to be used for the background to black using rgba (red, green, blue, alpha).  rgba(0, 0, 0, 0.04) results in almost pure black.
+    ctx.fillRect(0, 0, c.width, c.height);	//Here, the area to fill with the above color is defined as a rectangle, with starting coordinates at the very beginning of the display (top left corner)
+    								//that fill to the coordinate at the width and height of the rectangle (bottom right corner).
+    ctx.fillStyle = "#0F0"; 	//Sets the new color for filling to a hexademical value the is the terminal-style green of the text.
+    ctx.font = font_size + "px arial";		//Sets the font size to the earlier defined value and the font.
+
+    for(var i = 0; i < drops.length; i++)	//Initializes another for loop to loop through the drops array to repeat the raining effect.
+        {
+    var text = matrix[Math.floor(Math.random()*matrix.length)];		//Initializes a new String variable to the content at the index of "Math.floor(Math.random()*matrix.length)" within matrix.
+    //"Math.floor(Math.random()*matrix.length)" consists of Math.random(), which returns a random number 0 <= n < 1, matrix.length,
+    //which accesses the field of the array called "matrix" that conatins its length (number of rows, or number of indices-1),
+    //and Math.floor(), which returns the highest integer less than or equal to the number pass in as a parameter.
+    //Here, Math.random() creates a random number 0 <= n < 1 and multiples it by the number of elements in the matrix, then passes that value
+    //into Math.floor() to get an integer value equal to or below that number, which will be random line of the matrix to produce the next character on.
