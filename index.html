@@ -35,5 +35,8 @@
 
     var drops = [];					//Creates a one-dimensional array for the drops.  There will be one drop in each column.
 
-    or(var x = 0; x < columns; x++)  //This for loop iterates through each x-coordinate of the drops array, or each column, an assigns its y-coordinate to 1, because all of the drops will begin in the same respetive position.
+    or(var x = 0; x < columns; x++)  //This for loop iterates through each x-coordinate of the drops array, or each column, and assigns its y-coordinate to 1, because all of the drops will begin in the same respetive position.
             drops[x] = 1;					//A for loop is used because for-each loops cannot modify array contents, only access them.
+
+    function draw()					//This is the header for the function that will actually display the characters on the screen.  It takes no parameters.
+        {
