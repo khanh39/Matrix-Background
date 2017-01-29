@@ -23,3 +23,6 @@
             // getting canvas by id c
             var c = document.getElementById("c");
             var ctx = c.getContext("2d");
+
+    c.height = window.innerHeight;  //Uses preexisting fields (innerHeight and innerWidth) of the window to assign a full-frame size to the canvas.  The size is of the viewing window or rendered pane,
+    c.width = window.innerWidth;		//not of the entire monitor.
