@@ -15,3 +15,11 @@
         </style>
     </head>
     <body>
+
+      <canvas id="c"></canvas> <!--Creates a canvas to act as the background layer.  The canvas is edited according to the below code, and then acts as a background layer.  It is assigned an element ID
+      									(since it will be the only element of its type) of "c".-->
+
+    <script>
+            // getting canvas by id c
+            var c = document.getElementById("c");
+            var ctx = c.getContext("2d");
