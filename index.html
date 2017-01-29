@@ -55,3 +55,21 @@
     //and Math.floor(), which returns the highest integer less than or equal to the number pass in as a parameter.
     //Here, Math.random() creates a random number 0 <= n < 1 and multiples it by the number of elements in the matrix, then passes that value
     //into Math.floor() to get an integer value equal to or below that number, which will be random line of the matrix to produce the next character on.
+    ctx.fillText(text, i*font_size, drops[i]*font_size);		//Here, the String text from the line above is filled with its contents, its x-coordinate (i, the value of the loop counter, times font_size (10)),
+		//and its y-coordinate (the current column (drops array at index i) times font_size (10)).
+
+
+    if(drops[i]*font_size > c.height && Math.random() > 0.975)	//This quick conditional statement checks to see if the function has reached the bottom of the screen by checking if the element of drops at drops[i] = 0;											//index i times font_size (10) is gretaer than the hieght value of the canvas.  At the same time, it randomly creates another number 0 <= n < 1
+		//and checks if it is greater than 0.975.  By doing this, after the first iteration of the loop, the columns will not all print on the same line
+		//at the same time, which will give them an offset, raining effect.  If both are true, it resets the position to print from to 0, the top of the column.
+
+    drops[i]++;													//This simply increments the y-coordinate in order to move across the screen through each row.
+    }
+}
+
+setInterval(draw, 35);												//This built-in function is called to set an interval of 35 milliseconds between each time the draw() function is called, to create a tiny break
+                                    //Within the rain.
+
+      </script>
+  </body>
+</html>
