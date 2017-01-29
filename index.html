@@ -16,60 +16,66 @@
     </head>
     <body>
 
-      <canvas id="c"></canvas> <!--Creates a canvas to act as the background layer.  The canvas is edited according to the below code, and then acts as a background layer.  It is assigned an element ID
-      									(since it will be the only element of its type) of "c".-->
+        <canvas id="c"></canvas> <!--Creates a canvas to act as the background layer.  The canvas is edited according to the below code, and then acts as a background layer.  It is assigned an element ID
+									(since it will be the only element of its type) of "c".-->
 
-    <script>
-            // getting canvas by id c
-            var c = document.getElementById("c");
-            var ctx = c.getContext("2d");
+        <script>
+        // geting canvas by id c
+        var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
 
-    c.height = window.innerHeight;  //Uses preexisting fields (innerHeight and innerWidth) of the window to assign a full-frame size to the canvas.  The size is of the viewing window or rendered pane,
-    c.width = window.innerWidth;		//not of the entire monitor.
+        c.height = window.innerHeight;  //Uses preexisting fields (innerHeight and innerWidth) of the window to assign a full-frame size to the canvas.  The size is of the viewing window or rendered pane,
+        c.width = window.innerWidth;		//not of the entire monitor.
 
-    var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";  //Creates a String variable that contains all of the characters to be used in the background animation.  It utilizes the universal Unicode character set.
+        var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";  //Creates a String variable that contains all of the characters to be used in the background animation.  It utilizes the
+																				//universal Unicode character set.
+        matrix = matrix.split("");		//Calls a built-in funtion of strings that splits a string up into smaller strings or characters.  The parameter, which is a string that the method uses to find where it should
+											//split the original string by finding each instance of the passed-in string, contains no characters (""), which instructs to method to split the string at each character.
+        var font_size = 10;				//Simply sets the size of the font to 10, for use later.
+        var columns = c.width/font_size; // Uses the width of the canvas and the font side to divide up the canvas into equal columns for the "rain" across the whole screen.
 
-    matrix = matrix.split("");		//Calls a built-in function of strings that splits a string up into smaller strings or characters.  The parameter, which is a string that the method uses to find where it should split the original string by finding each instance of the passed-in string, contains no characters (""), which instructs to method to split the string at each character.
-    var font_size = 10;				//Simply sets the size of the font to 10, for use later.
-    var columns = c.width/font_size; // Uses the width of the canvas and the font side to divide up the canvas into equal columns for the "rain" across the whole screen.
+        var drops = [];					//Creates a one-dimensional array for the drops.  There will be one drop in each column.
 
-    var drops = [];					//Creates a one-dimensional array for the drops.  There will be one drop in each column.
 
-    or(var x = 0; x < columns; x++)  //This for loop iterates through each x-coordinate of the drops array, or each column, and assigns its y-coordinate to 1, because all of the drops will begin in the same respetive position.
+        for(var x = 0; x < columns; x++)  //This for loop iterates through each x-coordinate of the drops array, or each column, an assigns its y-coordinate to 1, because all of the drops will begin in the same respetive position.
             drops[x] = 1;					//A for loop is used because for-each loops cannot modify array contents, only access them.
 
-    function draw()					//This is the header for the function that will actually display the characters on the screen.  It takes no parameters.
+
+        function draw()					//This is the header for the function that will actually display the characters on the screen.  It takes no parameters.
         {
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.04)";  //Sets the color to be used for the background to black using rgba (red, green, blue, alpha).  rgba(0, 0, 0, 0.04) results in almost pure black.
-    ctx.fillRect(0, 0, c.width, c.height);	//Here, the area to fill with the above color is defined as a rectangle, with starting coordinates at the very beginning of the display (top left corner)
-    								//that fill to the coordinate at the width and height of the rectangle (bottom right corner).
-    ctx.fillStyle = "#0F0"; 	//Sets the new color for filling to a hexademical value the is the terminal-style green of the text.
-    ctx.font = font_size + "px arial";		//Sets the font size to the earlier defined value and the font.
 
-    for(var i = 0; i < drops.length; i++)	//Initializes another for loop to loop through the drops array to repeat the raining effect.
-        {
-    var text = matrix[Math.floor(Math.random()*matrix.length)];		//Initializes a new String variable to the content at the index of "Math.floor(Math.random()*matrix.length)" within matrix.
-    //"Math.floor(Math.random()*matrix.length)" consists of Math.random(), which returns a random number 0 <= n < 1, matrix.length,
-    //which accesses the field of the array called "matrix" that conatins its length (number of rows, or number of indices-1),
-    //and Math.floor(), which returns the highest integer less than or equal to the number pass in as a parameter.
-    //Here, Math.random() creates a random number 0 <= n < 1 and multiples it by the number of elements in the matrix, then passes that value
-    //into Math.floor() to get an integer value equal to or below that number, which will be random line of the matrix to produce the next character on.
-    ctx.fillText(text, i*font_size, drops[i]*font_size);		//Here, the String text from the line above is filled with its contents, its x-coordinate (i, the value of the loop counter, times font_size (10)),
-		//and its y-coordinate (the current column (drops array at index i) times font_size (10)).
+            ctx.fillStyle = "rgba(0, 0, 0, 0.04)";  //Sets the color to be used for the background to black using rgba (red, green, blue, alpha).  rgba(0, 0, 0, 0.04) results in almost pure black.
+            ctx.fillRect(0, 0, c.width, c.height);	//Here, the area to fill with the above color is defined as a rectangle, with starting coordinates at the very beginning of the display (top left corner)
+														//that fill to the coordiante at the width and height of the rectangle (bottom right corner).
+            ctx.fillStyle = "#0F0"; 	//Sets the new color for filling to a hexademical value the is the terminal-style green of the text.
+            ctx.font = font_size + "px arial";		//Sets the font size to the earlier defined value and the font.
+
+            for(var i = 0; i < drops.length; i++)	//Initializes another for loop to loop through the drops array to repeat the raining effect.
+            {
+
+                var text = matrix[Math.floor(Math.random()*matrix.length)];		//Initializes a new String variable to the content at the index of "Math.floor(Math.random()*matrix.length)" within matrix.
+																				//"Math.floor(Math.random()*matrix.length)" consists of Math.random(), which returns a random number 0 <= n < 1, matrix.length,
+																				//which accesses the field of the array called "matrix" that conatins its length (number of rows, or number of indices-1),
+																				//and Math.floor(), which returns the highest integer less than or equal to the number pass in as a parameter.
+																				//Here, Math.random() creates a random number 0 <= n < 1 and multiples it by the number of elements in the matrix, then passes that value
+																				//into Math.floor() to get an integer value equal to or below that number, which will be random line of the matrix to produce the next character on.
+                ctx.fillText(text, i*font_size, drops[i]*font_size);		//Here, the String text from the line above is filled with its contents, its x-coordinate (i, the value of the loop counter, times font_size (10)),
+																			//and its y-coordinate (the current column (drops array at index i) times font_size (10)).
 
 
-    if(drops[i]*font_size > c.height && Math.random() > 0.975)	//This quick conditional statement checks to see if the function has reached the bottom of the screen by checking if the element of drops at drops[i] = 0;											//index i times font_size (10) is gretaer than the hieght value of the canvas.  At the same time, it randomly creates another number 0 <= n < 1
-		//and checks if it is greater than 0.975.  By doing this, after the first iteration of the loop, the columns will not all print on the same line
-		//at the same time, which will give them an offset, raining effect.  If both are true, it resets the position to print from to 0, the top of the column.
+                if(drops[i]*font_size > c.height && Math.random() > 0.975)	//This quick conditional statement checks to see if the function has reached the bottom of the screen by checking if the element of drops at
+                    drops[i] = 0;											//index i times font_size (10) is gretaer than the hieght value of the canvas.  At the same time, it randomly creates another number 0 <= n < 1
+																			//and checks if it is greater than 0.975.  By doing this, after the first iteration of the loop, the columns will not all print on the same line
+																			//at the same time, which will give them an offset, raining effect.  If both are true, it resets the position to print from to 0, the top of the column.
 
-    drops[i]++;													//This simply increments the y-coordinate in order to move across the screen through each row.
-    }
-}
+                drops[i]++;													//This simply increments the y-coordinate in order to move across the screen through each row.
+            }
+        }
 
-setInterval(draw, 35);												//This built-in function is called to set an interval of 35 milliseconds between each time the draw() function is called, to create a tiny break
-                                    //Within the rain.
+        setInterval(draw, 35);												//This built-in function is called to set an interval of 35 milliseconds between each time the draw() function is called, to create a tiny break
+																			//Within the rain.
 
-      </script>
-  </body>
+        </script>
+    </body>
 </html>
